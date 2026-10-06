@@ -168,7 +168,12 @@ class InPostApi:
             response = await self._request(
                 method="post",
                 url=f"https://inpost.pl/shipx-point-data/{locker_id}/{locker_code}/air_index_level",
-                headers={"X-Requested-With": "XMLHttpRequest"},
+                headers={
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Origin": "https://inpost.pl",
+                    "Referer": "https://inpost.pl/",
+                    "Accept": "application/json, text/javascript, */*; q=0.01",
+                },
                 raise_client_response_error=True,
             )
         except ClientResponseError as e:

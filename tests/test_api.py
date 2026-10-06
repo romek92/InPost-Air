@@ -105,3 +105,5 @@ async def test_user_agent_header_with_custom_headers(hass):
         _, kwargs = mock_request.call_args
         assert kwargs["headers"]["User-Agent"] == USER_AGENT
         assert kwargs["headers"]["X-Requested-With"] == "XMLHttpRequest"
+        assert kwargs["headers"]["Origin"] == "https://inpost.pl"
+        assert kwargs["headers"]["Referer"] == "https://inpost.pl/"
