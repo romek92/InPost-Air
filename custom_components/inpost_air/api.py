@@ -8,6 +8,7 @@ from aiohttp import ClientResponse, ClientResponseError
 from dacite import from_dict
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
+from custom_components.inpost_air.const import USER_AGENT
 from custom_components.inpost_air.models import InPostAirPoint
 from custom_components.inpost_air.utils import get_parcel_locker_url
 
@@ -45,12 +46,16 @@ class InPostApi:
         raise_client_response_error: bool = False,
     ) -> ClientResponse:
         """Get information from the API."""
+        request_headers = {"User-Agent": USER_AGENT}
+        if headers:
+            request_headers.update(headers)
+
         try:
             async with asyncio.timeout(30):
                 response = await self.session.request(
                     method=method,
                     url=url,
-                    headers=headers,
+                    headers=request_headers,
                 )
                 response.raise_for_status()
 

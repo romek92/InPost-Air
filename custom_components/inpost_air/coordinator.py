@@ -70,7 +70,7 @@ class InPostAirDataCoordinator(DataUpdateCoordinator):
             hass,
             _LOGGER,
             name=f"Parcel Locker {parcel_locker.locker_code} data coordinator",
-            update_interval=timedelta(minutes=5),
+            update_interval=timedelta(minutes=30),
         )
         self.api_client = api_client
         self.parcel_locker = parcel_locker
